@@ -20,6 +20,7 @@
     <aside class="sidebar">
       <div class="side-label">SEASON CONTROL</div>
       <button class="nav active" data-page="overview">◈ <span>Overview</span></button>
+      <button class="nav" data-page="play">▶ <span>Play Season</span></button>
       <button class="nav" data-page="cast">♟ <span>Houseguests</span></button>
       <button class="nav" data-page="relationships">♡ <span>Relationships</span></button>
       <button class="nav" data-page="schedule">▦ <span>Season Schedule</span></button>
@@ -30,7 +31,7 @@
         <label class="side-action import-label">Import JSON<input type="file" id="importFile" accept=".json,application/json"></label>
         <button class="side-action danger" id="resetBtn">Reset Season</button>
       </div>
-      <div class="side-foot">INDEPENDENT BB29 BUILD<br>VERSION 1.0 • SETUP STAGE</div>
+      <div class="side-foot">INDEPENDENT BB29 BUILD<br>VERSION 2.0 • PLAYABLE SEASON</div>
     </aside>
 
     <main class="main-content">
@@ -75,9 +76,13 @@
             <button class="secondary-btn" data-goto="cast">Edit Cast</button>
           </article>
         </div>
-        <div class="notice"><b>Build note:</b> This first independent release establishes the BB29 season setup, cast editor, relationship editor, and season reference schedule. The actual week-by-week simulation engine is not yet included in this setup build.</div>
+        <div class="notice"><b>Simulation:</b> Start a new season from Play Season after customizing your cast. Season progress is saved in this browser independently of your cast setup.</div>
       </section>
 
+      <section class="page" id="page-play">
+        <div class="page-heading"><div><div class="eyebrow">THE GAME BEGINS</div><h2>Play BB29</h2><p>Run the season one event at a time. Competitions use your cast attributes with randomized performance.</p></div><button class="secondary-btn" id="resetGame">Reset Simulation</button></div>
+        <div id="gamePanel"></div>
+      </section>
       <section class="page" id="page-cast">
         <div class="page-heading"><div><div class="eyebrow">MEET THE HOUSE</div><h2>Houseguests</h2><p>Edit names, portraits, biographies, and player attributes.</p></div><button class="primary-btn" id="addHG">+ Add Houseguest</button></div>
         <div class="cast-toolbar">
@@ -104,7 +109,7 @@
       <section class="page" id="page-schedule">
         <div class="page-heading"><div><div class="eyebrow">97-DAY SEASON PLAN</div><h2>Season Schedule</h2><p>The supplied competition lineup, organized into the BB29 season structure.</p></div><span class="status-pill">14 WEEKS</span></div>
         <div id="scheduleList" class="schedule-list"></div>
-        <div class="notice">The schedule is a reference plan. Week dates and day-by-day event timing can be refined when the simulation engine is added.</div>
+        <div class="notice">The schedule is the competition reference for the playable season engine. Events advance in the order shown on the Play Season page.</div>
       </section>
 
       <section class="page" id="page-twists">
@@ -131,5 +136,6 @@
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
+  <script src="game-engine.js"></script>
 </body>
 </html>
