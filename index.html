@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Big Brother 29: BB House Party</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">BB<span>29</span></div>
+    <div class="brand-copy">
+      <div class="eyebrow">THE CUSTOM BIG BROTHER SIMULATOR</div>
+      <h1>BB HOUSE PARTY</h1>
+    </div>
+    <div class="season-chip">SUMMER 2026 <span>•</span> 16 HOUSEGUESTS</div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="side-label">SEASON CONTROL</div>
+      <button class="nav active" data-page="overview">◈ <span>Overview</span></button>
+      <button class="nav" data-page="cast">♟ <span>Houseguests</span></button>
+      <button class="nav" data-page="relationships">♡ <span>Relationships</span></button>
+      <button class="nav" data-page="schedule">▦ <span>Season Schedule</span></button>
+      <button class="nav" data-page="twists">✦ <span>Twists & Rules</span></button>
+      <div class="sidebar-bottom">
+        <button class="side-action" id="saveBtn">Save Season</button>
+        <button class="side-action" id="exportBtn">Export JSON</button>
+        <label class="side-action import-label">Import JSON<input type="file" id="importFile" accept=".json,application/json"></label>
+        <button class="side-action danger" id="resetBtn">Reset Season</button>
+      </div>
+      <div class="side-foot">INDEPENDENT BB29 BUILD<br>VERSION 1.0 • SETUP STAGE</div>
+    </aside>
+
+    <main class="main-content">
+      <section class="page active" id="page-overview">
+        <div class="hero">
+          <div class="hero-content">
+            <div class="eyebrow light">WELCOME TO THE PARTY</div>
+            <h2>16 Houseguests.<br><em>One summer.</em><br>One winner.</h2>
+            <p>Build your cast, shape the relationships, and prepare for a 97-day Big Brother season.</p>
+            <button class="primary-btn" data-goto="cast">Customize the Houseguests <span>→</span></button>
+          </div>
+          <div class="disco-art" aria-hidden="true">
+            <div class="disco-ball"></div><div class="beam beam-one"></div><div class="beam beam-two"></div>
+            <div class="floor-line"></div><div class="floor-line second"></div>
+            <div class="party-star star-a">✦</div><div class="party-star star-b">✧</div><div class="party-star star-c">✦</div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="metric"><span class="metric-icon">♟</span><div><strong id="countHG">16</strong><small>HOUSEGUESTS</small></div></article>
+          <article class="metric"><span class="metric-icon">◷</span><div><strong>97</strong><small>DAYS</small></div></article>
+          <article class="metric"><span class="metric-icon">♛</span><div><strong>9</strong><small>JURY MEMBERS</small></div></article>
+          <article class="metric"><span class="metric-icon">⚡</span><div><strong>1</strong><small>DOUBLE EVICTION</small></div></article>
+        </div>
+
+        <div class="section-heading"><div><div class="eyebrow">SEASON SNAPSHOT</div><h3>BB29 at a glance</h3></div><span class="status-pill">SETUP IN PROGRESS</span></div>
+        <div class="overview-grid">
+          <article class="panel season-details">
+            <h4>Season Details</h4>
+            <div class="detail-row"><span>Season</span><b>Big Brother 29: BB House Party</b></div>
+            <div class="detail-row"><span>Premiere</span><b>June 11, 2026</b></div>
+            <div class="detail-row"><span>Finale</span><b>September 16, 2026</b></div>
+            <div class="detail-row"><span>Format</span><b>Traditional Big Brother</b></div>
+            <div class="detail-row"><span>Finale</span><b>Final 2</b></div>
+            <div class="detail-row"><span>Battle Back</span><b>Week 10 · First 4 jurors</b></div>
+          </article>
+          <article class="panel progress-panel">
+            <h4>Setup Progress</h4>
+            <p>Personalize the cast before starting a simulation.</p>
+            <div class="progress-line"><span id="profileProgress"></span></div>
+            <div class="progress-caption"><b id="profileCount">0 / 16</b><span>profiles customized</span></div>
+            <button class="secondary-btn" data-goto="cast">Edit Cast</button>
+          </article>
+        </div>
+        <div class="notice"><b>Build note:</b> This first independent release establishes the BB29 season setup, cast editor, relationship editor, and season reference schedule. The actual week-by-week simulation engine is not yet included in this setup build.</div>
+      </section>
+
+      <section class="page" id="page-cast">
+        <div class="page-heading"><div><div class="eyebrow">MEET THE HOUSE</div><h2>Houseguests</h2><p>Edit names, portraits, biographies, and player attributes.</p></div><button class="primary-btn" id="addHG">+ Add Houseguest</button></div>
+        <div class="cast-toolbar">
+          <div class="filter-tabs"><button class="filter active" data-filter="all">All <b id="allCount">16</b></button><button class="filter" data-filter="Male">Men <b id="maleCount">8</b></button><button class="filter" data-filter="Female">Women <b id="femaleCount">8</b></button></div>
+          <input id="castSearch" class="search" placeholder="Search houseguests…" aria-label="Search houseguests">
+        </div>
+        <div id="castGrid" class="cast-grid"></div>
+      </section>
+
+      <section class="page" id="page-relationships">
+        <div class="page-heading"><div><div class="eyebrow">SOCIAL GAME</div><h2>Relationships</h2><p>Set the starting dynamics between any two houseguests.</p></div></div>
+        <div class="panel relationship-panel">
+          <div class="relationship-controls">
+            <label>Houseguest A<select id="relA"></select></label>
+            <label>Houseguest B<select id="relB"></select></label>
+          </div>
+          <div class="relationship-empty" id="relationshipEditor">
+            <div class="heart-mark">♡</div><h3>Choose two houseguests</h3><p>Their starting relationship values will appear here.</p>
+          </div>
+        </div>
+        <div class="panel relationship-key"><h4>Relationship attributes</h4><p><b>Friendship</b> · <b>Trust</b> · <b>Loyalty</b> · <b>Rivalry</b> · <b>Respect</b> · <b>Attraction</b></p><small>Each value ranges from 0 to 100. These are editable starting values, not generated story outcomes.</small></div>
+      </section>
+
+      <section class="page" id="page-schedule">
+        <div class="page-heading"><div><div class="eyebrow">97-DAY SEASON PLAN</div><h2>Season Schedule</h2><p>The supplied competition lineup, organized into the BB29 season structure.</p></div><span class="status-pill">14 WEEKS</span></div>
+        <div id="scheduleList" class="schedule-list"></div>
+        <div class="notice">The schedule is a reference plan. Week dates and day-by-day event timing can be refined when the simulation engine is added.</div>
+      </section>
+
+      <section class="page" id="page-twists">
+        <div class="page-heading"><div><div class="eyebrow">SPECIAL GAMEPLAY</div><h2>Twists & Rules</h2><p>BB29's custom mechanics and their intended limits.</p></div></div>
+        <div id="twistList" class="twist-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="hgDialog">
+    <form method="dialog" id="hgForm">
+      <div class="dialog-head"><div><div class="eyebrow">HOUSEGUEST PROFILE</div><h3 id="dialogTitle">Edit Houseguest</h3></div><button class="close-btn" value="cancel" aria-label="Close">×</button></div>
+      <input type="hidden" id="hgId">
+      <div class="form-grid">
+        <label>Full name<input id="hgName" required></label>
+        <label>Gender<select id="hgGender"><option>Male</option><option>Female</option><option>Other</option></select></label>
+        <label class="wide">Portrait image URL<input id="hgPortrait" placeholder="https://…"></label>
+        <label class="wide">Short biography<textarea id="hgBio" rows="2" placeholder="Optional background or personality notes"></textarea></label>
+      </div>
+      <h4 class="form-subhead">Player attributes <small>0–100</small></h4>
+      <div id="statFields" class="stat-fields"></div>
+      <div class="dialog-actions"><button type="button" class="secondary-btn" id="cancelHG">Cancel</button><button type="submit" class="primary-btn">Save Profile</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
